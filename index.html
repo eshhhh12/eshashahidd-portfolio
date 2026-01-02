@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esha Shahid | Computer Science Graduate & Web Developer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #8B6F95;
+      --primary-dark: #6d5577;
+      --accent-pink: #F0A3B6;
+      --accent-peach: #FCCDB8;
+      --accent-cream: #FBE8D8;
+      --dark-brown: #49312C;
+      --text-dark: #49312C;
+      --text-light: #6d5577;
+      --bg-light: #FBE8D8;
+      --border: #FCCDB8;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(73, 49, 44, 0.1);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--text-dark);
+      transition: 0.3s;
+    }
+
+    .hero {
+      margin-top: 80px;
+      padding: 5rem 5% 4rem;
+      text-align: center;
+      background: linear-gradient(135deg, #FBE8D8 0%, #FCCDB8 50%, #F0A3B6 100%);
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .hero .subtitle {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: 2px solid var(--primary);
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 111, 149, 0.4);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-light);
+    }
+
+    section {
+      padding: 5rem 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h3 {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      color: var(--text-dark);
+      position: relative;
+    }
+
+    h3::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--primary);
+      margin: 1rem auto 0;
+      border-radius: 2px;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .about-info {
+      background: var(--bg-light);
+      padding: 2rem;
+      border-radius: 12px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .info-item {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-item strong {
+      color: var(--text-dark);
+      min-width: 100px;
+    }
+
+    .info-item a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .info-item a:hover {
+      text-decoration: underline;
+    }
+
+    .experience-grid, .projects-grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .exp-card, .project-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(73, 49, 44, 0.08);
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+
+    .exp-card:hover, .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(139, 111, 149, 0.15);
+      border-color: var(--accent-pink);
+    }
+
+    .exp-card h4, .project-card h4 {
+      color: var(--text-dark);
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-meta {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .exp-card ul {
+      margin-left: 1.5rem;
+      color: var(--text-light);
+    }
+
+    .exp-card li {
+      margin-bottom: 0.5rem;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tech-tag {
+      background: var(--bg-light);
+      color: var(--primary);
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+    }
+
+    .project-card p {
+      color: var(--text-light);
+      margin: 1rem 0;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .skill-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 4px 16px rgba(139, 111, 149, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .skill-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .skill-card h4 {
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .skill-card p {
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    .certifications {
+      background: var(--bg-light);
+    }
+
+    .cert-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .cert-item {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      border-left: 4px solid var(--accent-pink);
+      box-shadow: 0 2px 8px rgba(73, 49, 44, 0.05);
+    }
+
+    .cert-item h4 {
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .cert-item p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      background: var(--dark-brown);
+      color: white;
+      text-align: center;
+      padding: 3rem 5%;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .social-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: var(--accent-pink);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        flex-direction: column;
+        background: white;
+        width: 70%;
+        height: calc(100vh - 70px);
+        padding: 2rem;
+        box-shadow: -2px 0 8px rgba(73, 49, 44, 0.1);
+        transition: right 0.3s;
+      }
+
+      nav.active {
+        right: 0;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .hero .subtitle {
+        font-size: 1.2rem;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+
+      h3 {
+        font-size: 2rem;
+      }
+
+      section {
+        padding: 3rem 5%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 3rem 5% 2rem;
+      }
+
+      .hero h2 {
+        font-size: 1.75rem;
+      }
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <h1 class="logo">Esha Shahid</h1>
+    <nav id="nav">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h2>Hi, I'm Esha Shahid</h2>
+    <p class="subtitle">Computer Science Graduate & Web Developer</p>
+    <p>
+      I'm a passionate Computer Science graduate from Rawalakot, Azad Kashmir, specializing in web development 
+      and UI/UX design. With hands-on experience in PHP, MySQL, and modern web technologies, I create 
+      dynamic and user-friendly digital experiences.
+    </p>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn">View My Projects</a>
+      <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <h3>About Me</h3>
+    <div class="about-content">
+      <div class="about-text">
+        <p>
+          I recently graduated with a Bachelor of Science in Computer Science from the University of Poonch, Rawalakot. 
+          My journey in tech has been driven by curiosity and a genuine passion for building solutions that make a difference.
+        </p>
+        <p>
+          Throughout my academic career and internships, I've developed strong technical skills in web development, 
+          backend programming, and interface design. I thrive in collaborative environments and enjoy turning complex 
+          problems into elegant, user-friendly solutions.
+        </p>
+        <p>
+          I'm eager to contribute to innovative projects and continue growing as a developer while bringing creativity 
+          and attention to detail to every challenge I tackle.
+        </p>
+      </div>
+      <div class="about-info">
+        <div class="info-item">
+          <strong>Location:</strong>
+          <span>Rawalakot, Azad Kashmir</span>
+        </div>
+        <div class="info-item">
+          <strong>Email:</strong>
+          <a href="mailto:eshashahidd12@gmail.com">eshashahidd12@gmail.com</a>
+        </div>
+        <div class="info-item">
+          <strong>Education:</strong>
+          <span>BS Computer Science (2021-2025)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h3>Professional Experience</h3>
+    <div class="experience-grid">
+      <div class="exp-card">
+        <h4>PHP Intern</h4>
+        <p class="exp-meta">Ezeesol Technology</p>
+        <ul>
+          <li>Worked on backend development using PHP and MySQL to build robust web applications</li>
+          <li>Assisted in creating and maintaining dynamic web pages with focus on performance and security</li>
+          <li>Gained hands-on experience in full-stack web application development lifecycle</li>
+          <li>Collaborated with senior developers to implement best practices in code organization</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">PHP</span>
+          <span class="tech-tag">MySQL</span>
+          <span class="tech-tag">Backend Development</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <h4>UI/UX Design Intern</h4>
+        <p class="exp-meta">Project-Based Experience</p>
+        <ul>
+          <li>Created comprehensive prototypes and interface designs in Figma for a Virtual Wardrobe App</li>
+          <li>Collaborated with the development team to improve user experience and implement design systems</li>
+          <li>Conducted user research to understand pain points and optimize user flows</li>
+          <li>Designed responsive interfaces ensuring consistency across different screen sizes</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">Figma</span>
+          <span class="tech-tag">UI/UX Design</span>
+          <span class="tech-tag">Prototyping</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <h4>Teacher</h4>
+        <p class="exp-meta">Sir Syed School And College | 2 Months</p>
+        <ul>
+          <li>Taught English and Computer Science subjects to college students</li>
+          <li>Helped students understand key programming concepts and managed classroom activities</li>
+          <li>Developed strong communication and presentation skills while explaining technical topics</li>
+          <li>Created engaging lesson plans that improved student comprehension and engagement</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">Teaching</span>
+          <span class="tech-tag">Communication</span>
+          <span class="tech-tag">Leadership</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <h4>Facebook Outreach Specialist</h4>
+        <p class="exp-meta">Faiz Content Creations | Internship</p>
+        <ul>
+          <li>Developed and executed outreach strategies to engage with target audiences</li>
+          <li>Managed client communication and built strong relationships with stakeholders</li>
+          <li>Analyzed audience behavior to optimize content delivery and engagement rates</li>
+          <li>Strengthened problem-solving and organizational skills in a fast-paced environment</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">Social Media</span>
+          <span class="tech-tag">Client Communication</span>
+          <span class="tech-tag">Analytics</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h3>Featured Projects</h3>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h4>Celebrity And Fan Club</h4>
+        <p>
+          A dynamic web application connecting celebrities with their fan base. Built with a focus on 
+          real-time interactions, user authentication, and responsive design. Features include member 
+          profiles, content sharing, and asynchronous updates using AJAX for seamless user experience.
+        </p>
+        <div class="tech-tags">
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">AJAX</span>
+          <span class="tech-tag">PHP</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h4>To-Do List Application</h4>
+        <p>
+          A mobile task management app developed using Flutter with an intuitive interface for organizing 
+          daily activities. Features include task categorization, priority levels, due date reminders, and 
+          a clean, modern UI that enhances productivity and user engagement.
+        </p>
+        <div class="tech-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Dart</span>
+          <span class="tech-tag">Mobile Development</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h4>Virtual Wardrobe App - UI Design</h4>
+        <p>
+          Comprehensive UI/UX design for a mobile application that helps users organize and plan their 
+          wardrobe digitally. Created complete user flows, wireframes, and high-fidelity mockups in Figma 
+          with focus on color consistency, accessibility, and intuitive navigation.
+        </p>
+        <div class="tech-tags">
+          <span class="tech-tag">Figma</span>
+          <span class="tech-tag">UI/UX Design</span>
+          <span class="tech-tag">Prototyping</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h3>Skills & Expertise</h3>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">💻</div>
+        <h4>Web Development</h4>
+        <p>HTML, CSS, JavaScript, PHP, MySQL, Bootstrap, Responsive Design, AJAX</p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🎨</div>
+        <h4>UI/UX Design</h4>
+        <p>Figma, Prototyping, User Research, Interface Design, Design Systems, Color Theory</p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">📱</div>
+        <h4>Mobile Development</h4>
+        <p>Flutter, Dart, Mobile UI Design, Cross-platform Development</p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <h4>Database Management</h4>
+        <p>MySQL, Database Design, Query Optimization, Data Modeling</p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🤝</div>
+        <h4>Soft Skills</h4>
+        <p>Communication, Time Management, Problem-solving, Teamwork, Leadership, Presentation</p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🛠️</div>
+        <h4>Tools & Platforms</h4>
+        <p>Microsoft Office, GitHub, VS Code, Content Management, Project Planning</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications" class="certifications">
+    <h3>Certifications & Training</h3>
+    <div class="cert-list">
+      <div class="cert-item">
+        <h4>Bootcamp Certification in Mobile App Development</h4>
+        <p>Web Development Bootcamp</p>
+      </div>
+      <div class="cert-item">
+        <h4>Workshop on IMECH</h4>
+        <p>Ghulam Ishaq Khan Institute (GIKI)</p>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="footer-content">
+      <h3 style="color: white; margin-bottom: 1rem;">Let's Connect</h3>
+      <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+      <div class="social-links">
+        <a href="mailto:eshashahidd12@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/esha-shahid-5992b52b1" target="_blank">LinkedIn</a>
+      </div>
+      <p style="margin-top: 2rem; opacity: 0.8;">&copy; 2026 Esha Shahid. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('nav');
+
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+      });
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
